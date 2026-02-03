@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { RacketService } from '../../services/racket.service';
 import { CartStateService } from '../../services/cart-state.service';
 import { Racket } from '../../models/racket.model';
 import { FormsModule } from '@angular/forms';
+import { ToastComponent } from '../../components/toast.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ToastComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -17,13 +19,16 @@ export class HomeComponent implements OnInit {
 [x: string]: any;
 
   rackets$!: Observable<Racket[]>;
-
   qty: { [key: number]: number } = {};
 
+  toastMsg = '';
+  showToast = false;
+  toastTimeout: any;
 
   constructor(
     private racketService: RacketService,
-    private cartState: CartStateService
+    private cartState: CartStateService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -36,12 +41,24 @@ export class HomeComponent implements OnInit {
 
     this.cartState.addItem(racketId, qty).subscribe({
       next: () => {
-        alert('Agregado al carrito 🛒');
+        this.showToastMsg('Agregado al carrito 🛒');
+        this.qty[racketId] = 1;
       },
       error: () => {
-        alert('Error al agregar');
+        this.showToastMsg('Error al agregar');
       }
     });
+  }
+
+  showToastMsg(msg: string) {
+    this.toastMsg = msg;
+    this.showToast = true;
+    this.cdr.markForCheck();
+    clearTimeout(this.toastTimeout);
+    this.toastTimeout = setTimeout(() => {
+      this.showToast = false;
+      this.cdr.markForCheck();
+    }, 3000);
   }
 
   inc(r: Racket) {
@@ -53,9 +70,6 @@ export class HomeComponent implements OnInit {
     const current = this.qty[r.id] || 1;
     if (current > 1) this.qty[r.id] = current - 1;
   }
-
-
-
 }
 
 

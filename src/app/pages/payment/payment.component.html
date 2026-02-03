@@ -1,0 +1,60 @@
+<div class="payment-container" *ngIf="cart$ | async as cart">
+
+  <!-- MENSAJE DE ÉXITO -->
+  <div class="success-box" *ngIf="purchaseDone">
+    <h2>✅ ¡Compra realizada!</h2>
+    <p>Tu pago fue procesado correctamente.</p>
+    <p class="redirect">
+      Serás redirigido al inicio en unos segundos...
+    </p>
+  </div>
+
+  <!-- FORMULARIO -->
+  <ng-container *ngIf="!purchaseDone">
+
+    <h2 class="title">Forma de pago</h2>
+
+    <div class="payment-option"
+         (click)="select('CARD')"
+         [class.active]="selectedMethod === 'CARD'">
+      <img src="/assets/payments/card.svg" alt="Tarjeta">
+      <div class="info">
+        <strong>Tarjeta de crédito</strong>
+        <p>Pago a mes vencido</p>
+      </div>
+    </div>
+
+    <div class="payment-option"
+         (click)="select('TRANSFER')"
+         [class.active]="selectedMethod === 'TRANSFER'">
+      <img src="/assets/payments/bank.svg" alt="Transferencia">
+      <div class="info">
+        <strong>Transferencia bancaria</strong>
+        <p>Acreditación inmediata</p>
+      </div>
+    </div>
+
+    <div class="payment-option"
+         (click)="select('PSE')"
+         [class.active]="selectedMethod === 'PSE'">
+      <img src="/assets/payments/pse.svg" alt="PSE">
+      <div class="info">
+        <strong>PSE</strong>
+        <p>Pago en línea inmediato</p>
+      </div>
+    </div>
+
+    <div class="payment-summary">
+      <h3>Total a pagar</h3>
+      <h2>$ {{ total(cart) }}</h2>
+    </div>
+
+    <button class="pay-btn"
+            [disabled]="!selectedMethod"
+            (click)="confirm()">
+      Confirmar compra
+    </button>
+
+  </ng-container>
+</div>
+

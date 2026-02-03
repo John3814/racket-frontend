@@ -1,35 +1,35 @@
+
 <div class="container">
+  <h2 class="home-title">Raquetas disponibles</h2>
   <div class="grid">
     <div class="card" *ngFor="let r of rackets$ | async">
-
-      <img [src]="r.imageUrl" />
-
-      <h3>{{ r.name }}</h3>
-      <p>{{ r.description }}</p>
-
-      <div class="price">$ {{ r.price }}</div>
-
-      <div class="stock" [class.out]="r.stock === 0">
-        Stock: {{ r.stock }}
+      <div class="card-img-box">
+        <img [src]="r.imageUrl" alt="{{ r.name }}" />
       </div>
-
-      <!-- Selector cantidad -->
-      <div class="qty-box">
-        <button (click)="dec(r)">−</button>
-
-        <span>{{ qty[r.id] || 1 }}</span>
-
-        <button (click)="inc(r)">+</button>
+      <div class="card-content">
+        <h3 class="card-name">{{ r.name }}</h3>
+        <p class="card-desc">{{ r.description }}</p>
+        <div class="card-details">
+          <span class="price">$ {{ r.price }}</span>
+          <span class="stock" [class.out]="r.stock === 0">
+            Stock: {{ r.stock }}
+          </span>
+        </div>
+        <div class="qty-box">
+          <button (click)="dec(r)">−</button>
+          <span>{{ qty[r.id] || 1 }}</span>
+          <button (click)="inc(r)">+</button>
+        </div>
+        <button 
+          class="add-cart-btn"
+          (click)="addToCart(r.id, qty[r.id] || 1, r.stock)"
+          [disabled]="r.stock === 0"
+        >
+          <img src="/assets/payments/cart.svg" alt="Carrito" class="cart-icon-img" /> Añadir al carrito
+        </button>
       </div>
-
-      <button 
-        (click)="addToCart(r.id, qty[r.id] || 1, r.stock)"
-        [disabled]="r.stock === 0"
-      >
-        🛒
-      </button>
-
     </div>
   </div>
+  <app-toast [message]="toastMsg" [show]="showToast"></app-toast>
 </div>
 

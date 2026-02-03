@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CartStateService } from '../../services/cart-state.service';
 import { Observable } from 'rxjs';
 import { Cart } from '../../models/cart.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +17,10 @@ export class CartComponent implements OnInit {
 
   cart$!: Observable<Cart | null>;
 
-  constructor(private cartState: CartStateService) {}
+  constructor(
+    private cartState: CartStateService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.cart$ = this.cartState.cart$;   
@@ -27,8 +31,8 @@ export class CartComponent implements OnInit {
     this.cartState.remove(racketId);
   }
 
-  checkout() {
-    this.cartState.checkout();
+  continue() {
+    this.router.navigate(['/payment']);
   }
 
   total() {

@@ -1,13 +1,14 @@
 <nav class="navbar">
   <div class="logo">
-    Tennis Store
+    <img src="/assets/payments/logoApp.png" alt="Logo" class="logo-img" />
+    <span class="logo-text">LET'S RACKET</span>
   </div>
 
   <div class="links">
     <a routerLink="/">Inicio</a>
 
     <a routerLink="/cart" class="cart-link">
-      🛒 Carrito
+      <img src="/assets/payments/cart.svg" alt="Carrito" class="cart-icon-img" /> Carrito
       <span class="badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
     </a>
   </div>

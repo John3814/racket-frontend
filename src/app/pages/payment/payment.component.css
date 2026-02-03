@@ -1,0 +1,111 @@
+/* ===== CONTENEDOR ===== */
+.payment-container {
+  max-width: 520px;
+  margin: auto;
+  padding: 1.5rem;
+}
+
+/* ===== TITULO ===== */
+.title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== OPCIONES ===== */
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.payment-option img {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+
+.payment-option .info p {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* Hover */
+.payment-option:hover {
+  background: #f7f7f7;
+}
+
+/* Activo */
+.payment-option.active {
+  border-color: #000;
+  background: #f0f0f0;
+  transform: scale(1.01);
+}
+
+/* ===== RESUMEN ===== */
+.payment-summary {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* ===== BOTON ===== */
+.pay-btn {
+  width: 100%;
+  padding: 16px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.pay-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* ===== SUCCESS ===== */
+.success-box {
+  text-align: center;
+  padding: 3rem 2rem;
+  border-radius: 14px;
+  background: #e8f9f0;
+  color: #1b5e20;
+  animation: fadeIn 0.4s ease-in;
+}
+
+/* ===== ANIMACION ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (min-width: 768px) {
+  .payment-container {
+    padding: 2.5rem;
+  }
+
+  .payment-option {
+    padding: 18px;
+  }
+
+  .pay-btn {
+    font-size: 1.05rem;
+  }
+}
