@@ -19,7 +19,7 @@ export class CartComponent implements OnInit {
   constructor(private cartState: CartStateService) {}
 
   ngOnInit() {
-    this.cart$ = this.cartState.cart$;   // 👈 ahora está tipado
+    this.cart$ = this.cartState.cart$;   
     this.cartState.loadCart();
   }
 

@@ -1,6 +1,10 @@
 <div class="cart-container" *ngIf="cart$ | async as cart">
 
-  <h2>🛒 Carrito</h2>
+  <h2>🛒 Tu carrito</h2>
+
+  <div *ngIf="cart.items.length === 0">
+    <p>Tu carrito está vacío</p>
+  </div>
 
   <div *ngFor="let item of cart.items" class="cart-item">
     <span>{{ item.racket.name }}</span>
@@ -14,8 +18,9 @@
 
   <h3>Total: $ {{ total() }}</h3>
 
-  <button (click)="checkout()">
-    💳 Pagar
+  <button class="checkout" (click)="checkout()">
+    💳 Confirmar compra
   </button>
 
 </div>
+

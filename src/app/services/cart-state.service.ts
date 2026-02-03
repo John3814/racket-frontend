@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 import { Cart } from '../models/cart.model';
 import { CartApiService } from './cart-api.service';
 
@@ -17,10 +17,10 @@ export class CartStateService {
     });
   }
 
-  add(racketId: number) {
-    this.cartApi.addToCart(racketId).subscribe(() => {
-      this.loadCart(); // 🔁 sincroniza estado con backend
-    });
+  addItem(racketId: number, quantity: number) {
+    return this.cartApi.addToCart(racketId, quantity).pipe(
+      tap(() => this.loadCart())
+    );
   }
 
   remove(racketId: number) {
@@ -44,3 +44,4 @@ export class CartStateService {
     );
   }
 }
+

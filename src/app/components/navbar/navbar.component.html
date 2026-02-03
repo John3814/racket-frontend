@@ -1,0 +1,14 @@
+<nav class="navbar">
+  <div class="logo">
+    Tennis Store
+  </div>
+
+  <div class="links">
+    <a routerLink="/">Inicio</a>
+
+    <a routerLink="/cart" class="cart-link">
+      🛒 Carrito
+      <span class="badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+    </a>
+  </div>
+</nav>
