@@ -1,0 +1,23 @@
+<div class="container">
+
+  <h1 class="title">🎾 Tennis Store</h1>
+
+  <div class="grid">
+
+    <div class="card" *ngFor="let r of rackets$ | async">
+
+      <img [src]="r.imageUrl" />
+      <h3>{{ r.name }}</h3>
+      <p class="price">$ {{ r.price }}</p>
+      <p class="desc">{{ r.description }}</p>
+      <p class="stock">Stock: {{ r.stock }}</p>
+
+      <button (click)="addToCart(r)">
+        🛒 Agregar al carrito
+      </button>
+
+
+    </div>
+
+  </div>
+</div>

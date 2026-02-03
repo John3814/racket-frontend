@@ -1,0 +1,21 @@
+<div class="cart-container" *ngIf="cart$ | async as cart">
+
+  <h2>🛒 Carrito</h2>
+
+  <div *ngFor="let item of cart.items" class="cart-item">
+    <span>{{ item.racket.name }}</span>
+    <span>x{{ item.quantity }}</span>
+    <span>$ {{ item.racket.price * item.quantity }}</span>
+
+    <button (click)="remove(item.racket.id)">❌</button>
+  </div>
+
+  <hr>
+
+  <h3>Total: $ {{ total() }}</h3>
+
+  <button (click)="checkout()">
+    💳 Pagar
+  </button>
+
+</div>
